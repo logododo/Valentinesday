@@ -27,7 +27,7 @@ createFlowers();
 
 // Herz-Feuerwerk
 function heartFirework() {
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 30; i++) {
         const heart = document.createElement("div");
         heart.textContent = "💖";
         heart.style.position = "absolute";
@@ -111,8 +111,8 @@ document.querySelectorAll(".flower").forEach(flower => {
 });
 
 
-    // Feuerwerk beim 13. Klick
-    if (yesClicks === 13) {
+    // Feuerwerk beim 7. Klick
+    if (yesClicks === 7) {
         heartFirework();
     }
 });
