@@ -3,9 +3,12 @@ const noBtn = document.getElementById("noBtn");
 const container = document.getElementById("flower-container");
 
 let yesClicks = 0;
+let noClickedOnce = false;
+let flowersVisible = true;
 
-// Viele Blumen erzeugen
+// Blumen erzeugen
 function createFlowers() {
+    container.innerHTML = ""; // alte Blumen löschen
     for (let i = 0; i < 40; i++) {
         const flower = document.createElement("div");
         flower.classList.add("flower");
@@ -16,6 +19,7 @@ function createFlowers() {
 
         container.appendChild(flower);
     }
+    flowersVisible = true;
 }
 
 createFlowers();
@@ -54,29 +58,51 @@ function heartFirework() {
     }
 }
 
-// NEIN → Blumen fallen herunter
+// NEIN → erstes Mal: Blumen fallen und verschwinden
 noBtn.addEventListener("click", () => {
-    document.querySelectorAll(".flower").forEach(flower => {
-        flower.classList.remove("jump");
-        flower.classList.add("fall");
+    if (!noClickedOnce && flowersVisible) {
+        noClickedOnce = true;
+
+        const flowers = document.querySelectorAll(".flower");
+        flowers.forEach(flower => {
+            flower.classList.add("fall");
+        });
 
         setTimeout(() => {
-            flower.style.top = "-50px";
-            flower.classList.remove("fall");
+            container.innerHTML = "";
+            flowersVisible = false;
         }, 2000);
-    });
+    }
 });
 
-// JA → Blumen springen + Klickzähler
+// NEIN → nach dem ersten Klick flüchtet der Button vor der Maus
+noBtn.addEventListener("mouseover", () => {
+    if (!noClickedOnce) return;
+
+    const x = Math.random() * (window.innerWidth - 200);
+    const y = Math.random() * (window.innerHeight - 200);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+});
+
+// JA → Blumen wieder erscheinen lassen, springen lassen, Feuerwerk beim 13. Klick
 yesBtn.addEventListener("click", () => {
     yesClicks++;
 
+    // Wenn Blumen weg sind → neu erzeugen
+    if (!flowersVisible) {
+        createFlowers();
+    }
+
+    // Blumen springen lassen
     document.querySelectorAll(".flower").forEach(flower => {
-        flower.classList.remove("fall");
         flower.classList.add("jump");
         setTimeout(() => flower.classList.remove("jump"), 600);
     });
 
+    // Feuerwerk beim 13. Klick
     if (yesClicks === 13) {
         heartFirework();
     }
