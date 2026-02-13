@@ -1,1 +1,42 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: pink;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+.buttons {
+    margin-top: 40px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+}
+
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
+
+#noBtn {
+    background-color: #ccc;
+}
+
+.flower {
+    position: absolute;
+    font-size: 30px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    from { transform: translateY(0); }
+    to { transform: translateY(100vh); opacity: 0; }
+}
 
