@@ -22,6 +22,7 @@ function createFlowers() {
     flowersVisible = true;
 }
 
+// Startzustand
 createFlowers();
 
 // Herz-Feuerwerk
@@ -68,6 +69,7 @@ noBtn.addEventListener("click", () => {
             flower.classList.add("fall");
         });
 
+        // WICHTIG: erst nach der Animation löschen
         setTimeout(() => {
             container.innerHTML = "";
             flowersVisible = false;
@@ -75,7 +77,7 @@ noBtn.addEventListener("click", () => {
     }
 });
 
-// NEIN → nach dem ersten Klick flüchtet der Button vor der Maus
+// NEIN → flüchtet vor der Maus
 noBtn.addEventListener("mouseover", () => {
     if (!noClickedOnce) return;
 
@@ -87,7 +89,7 @@ noBtn.addEventListener("mouseover", () => {
     noBtn.style.top = y + "px";
 });
 
-// JA → Blumen wieder erscheinen lassen, springen lassen, Feuerwerk beim 13. Klick
+// JA → Blumen wiederherstellen, springen lassen, Feuerwerk
 yesBtn.addEventListener("click", () => {
     yesClicks++;
 
@@ -96,7 +98,7 @@ yesBtn.addEventListener("click", () => {
         createFlowers();
     }
 
-    // Blumen springen lassen
+    // Blumen springen
     document.querySelectorAll(".flower").forEach(flower => {
         flower.classList.add("jump");
         setTimeout(() => flower.classList.remove("jump"), 600);
