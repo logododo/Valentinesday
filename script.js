@@ -27,7 +27,7 @@ createFlowers();
 
 // Herz-Feuerwerk
 function heartFirework() {
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 7; i++) {
         const heart = document.createElement("div");
         heart.textContent = "💖";
         heart.style.position = "absolute";
@@ -103,6 +103,13 @@ yesBtn.addEventListener("click", () => {
         flower.classList.add("jump");
         setTimeout(() => flower.classList.remove("jump"), 600);
     });
+
+    // Blumen drehen sich bei jedem Ja-Klick
+document.querySelectorAll(".flower").forEach(flower => {
+    flower.classList.add("spin");
+    setTimeout(() => flower.classList.remove("spin"), 600);
+});
+
 
     // Feuerwerk beim 13. Klick
     if (yesClicks === 13) {
